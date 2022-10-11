@@ -273,6 +273,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await fb.sendTextMessage('', sender, lang.KEYWORD_YES_NO_END, false);
       if (command === lang.KEYWORD_ACCEPT_END) {
         await processEndChat(sender, sender2);
+        await fb.sendTextButtons(sender, lang.END_CHAT, true, false, true, true, false);
       }
     } else if (command === lang.KEYWORD_START) {
       await fb.sendTextMessage('', sender, lang.START_ERR_ALREADY, false);
