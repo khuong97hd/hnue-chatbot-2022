@@ -40,8 +40,8 @@ export default {
 
   KEYWORD_START: 'batdau',
   KEYWORD_END: 'ketthuc',
-  KEYWORD_YES_NO_END: '[BOT] Bạn có chắc chắn kết thúc ?\n - Gửi "yes" để đồng ý thoát !\n',
-  KEYWORD_ACCEPT_END: 'yes',
+  KEYWORD_YES_NO_END: '[BOT] Bạn có chắc chắn kết thúc ?\n - Gửi "xacnhan" để đồng ý thoát !\n',
+  KEYWORD_ACCEPT_END: 'xacnhan',
   KEYWORD_GENDER: 'tim',
   KEYWORD_GENDER_MALE: 'nam',
   KEYWORD_GENDER_FEMALE: 'nu',
