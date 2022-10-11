@@ -90,7 +90,7 @@ export default {
 
   // Page persona profile picture
   PERSONA_PROFILE_PICTURE:
-    parseEnvString('PERSONA_PROFILE_PICTURE') || 'https://ptnkchat.github.io/assets/ptnk_logo.jpeg',
+    parseEnvString('PERSONA_PROFILE_PICTURE') || 'https://khuong97hd.github.io/img/logo_hnue_chatbot.png.png',
 
   // Heroku API key
   HEROKU_API_KEY: parseEnvString('HEROKU_API_KEY') || '',
