@@ -385,6 +385,44 @@ const sendTextButtons = async (
   await sendMessage(receiver, messageData, usePersona);
 };
 
+
+/**
+ * Send text message with buttons
+ * @param receiver - ID of receiver
+ * @param text - Text to send
+ * @param showAcceptExitButton - Should exit button
+ */
+ const sendAcceptExitButtons = async (
+  receiver: string,
+  text: string,
+  showAcceptExitButton: boolean,
+): Promise<void> => {
+  const buttons = [];
+
+  if (showAcceptExitButton) {
+    buttons.push({ type: 'postback', title: 'Kết thúc cuộc tình !', payload: lang.KEYWORD_ACCEPT_END });
+  }
+
+  let quick_replies: Array<SendQuickReply> = [];
+
+  const messageData: SendMessageObject = {};
+
+  if (showAcceptExitButton) {
+    messageData.attachment = {
+      type: 'template',
+      payload: {
+        template_type: 'button',
+        text,
+        buttons,
+      },
+    };
+  } else {
+    messageData.text = text;
+  }
+
+  await sendMessage(receiver, messageData, true);
+};
+
 /**
  * Send seed indicator
  * @param receiver - ID of receiver
@@ -434,6 +472,7 @@ export default {
   sendAttachment,
   sendTextMessage,
   sendTextButtons,
+  sendAcceptExitButtons,
   sendSeenIndicator,
   getUserData,
 };
