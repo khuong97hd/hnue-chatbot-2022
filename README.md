@@ -6,7 +6,7 @@
 
 Demo: https://m.me/hnuechatbot
 
-## Basic instruction
+## Cài đặt
 
 - Deploy to Heroku
 - Tạo db và public whitelist IP trên mongoDB : https://cloud.mongodb.com/  , copy MONGO_URI để set biến ở bước sau
@@ -50,5 +50,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Credit
 
 - Nguyen Xuan Son (a.k.a Nui or [@ngxson](https://github.com/ngxson)) for [Chatbot CHN](https://github.com/ngxson/chatbot-cnh) on which this project was originally based
-- Duong Van Khuong (a.k.a Nui or [@ngxson](https://github.com/khuong97hd)) for [Chatbot CHN](https://github.com/ngxson/chatbot-cnh) on which this project was originally based
+- Duong Van Khuong (a.k.a Nui or [@khuong97](https://github.com/khuong97hd)) for [Chatbot HNUE](https://github.com/khuong97hd/hnue-chatbot-2022) on which this project was originally based
 - Le Bao Hiep ([@hieplpvip](https://github.com/hieplpvip)) for maintaining this project
