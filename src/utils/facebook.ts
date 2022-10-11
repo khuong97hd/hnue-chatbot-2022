@@ -352,7 +352,7 @@ const sendTextButtons = async (
   }
 
   if (showReportButton) {
-    buttons.push({ type: 'web_url', title: 'Gửi phản hồi', url: config.REPORT_LINK });
+    buttons.push({ type: 'web_url', title: '💌 Gửi confessions', url: config.REPORT_LINK });
   }
 
   let quick_replies: Array<SendQuickReply> = [];

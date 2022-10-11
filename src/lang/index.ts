@@ -22,7 +22,7 @@ export default {
   START_ERR_ALREADY: '[BOT] Bạn không thể batdau khi chưa ketthuc...',
 
   WAITING: '[BOT] Đang tìm bạn chat... Nếu bạn muốn đổi giới tính, gửi ketthuc sau đó chọn giới tính mới.',
-  CONNECTED: '[BOT] Connected! Nếu muốn kết thúc, hãy gửi ketthuc',
+  CONNECTED: '[BOT] Đã kết nối! Nếu muốn kết thúc cuộc trò chuyện, hãy gửi "ketthuc"',
 
   END_CHAT: '[BOT] End chat!\nGửi batdau hoặc bấm vào nút để tìm bạn chat.',
   END_CHAT_PARTNER: '[BOT] Bạn ý đã ngắt kết nối :(\nGửi batdau hoặc bấm vào nút để tìm bạn chat.',
@@ -40,6 +40,8 @@ export default {
 
   KEYWORD_START: 'batdau',
   KEYWORD_END: 'ketthuc',
+  KEYWORD_YES_NO_END: '[BOT] Bạn có chắc chắn kết thúc ?\n - Gửi "yes" để đồng ý thoát !\n',
+  KEYWORD_ACCEPT_END: 'yes',
   KEYWORD_GENDER: 'tim',
   KEYWORD_GENDER_MALE: 'nam',
   KEYWORD_GENDER_FEMALE: 'nu',

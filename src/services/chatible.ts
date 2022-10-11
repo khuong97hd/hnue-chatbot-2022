@@ -270,7 +270,9 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
   } else if (!waitState && sender2 !== null) {
     // in chat room
     if (command === lang.KEYWORD_END) {
-      await processEndChat(sender, sender2);
+      if (command === lang.KEYWORD_ACCEPT_END) {
+        await processEndChat(sender, sender2);
+      }
     } else if (command === lang.KEYWORD_START) {
       await fb.sendTextMessage('', sender, lang.START_ERR_ALREADY, false);
     } else if (command === lang.KEYWORD_HELP) {
