@@ -271,11 +271,11 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     // in chat room
     if (command === lang.KEYWORD_END) {
       await fb.sendTextMessage('', sender, lang.KEYWORD_YES_NO_END, false);
-      if (command === lang.KEYWORD_ACCEPT_END) {
-        await processEndChat(sender, sender2);
-        await fb.sendTextButtons(sender, lang.END_CHAT, true, false, true, true, false);
-      }
-    } else if (command === lang.KEYWORD_START) {
+    } 
+    else if (command === lang.KEYWORD_ACCEPT_END) {
+      await processEndChat(sender, sender2);
+    }
+     else if (command === lang.KEYWORD_START) {
       await fb.sendTextMessage('', sender, lang.START_ERR_ALREADY, false);
     } else if (command === lang.KEYWORD_HELP) {
       await fb.sendTextButtons(sender, lang.HELP_TXT, false, true, true, false, false);
