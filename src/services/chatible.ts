@@ -236,10 +236,13 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
         } else if (gender === GenderEnum.FEMALE) {
           genderString = lang.GENDER_ARR_MALE;
         }
-
-        if (gender !== GenderEnum.UNKNOWN) {
-          await fb.sendTextMessage('', sender, lang.GENDER_WRITE_OK + genderString + lang.GENDER_WRITE_WARN, false);
+        else if (gender === GenderEnum.UNKNOWN) {
+          genderString = lang.GENDER_ARR_UNKNOWN;
         }
+
+        // if (gender !== GenderEnum.UNKNOWN) {
+          await fb.sendTextMessage('', sender, lang.GENDER_WRITE_OK + genderString + lang.GENDER_WRITE_WARN, false);
+        // }
 
         await db.setGender(sender, gender);
         await findPair(sender, gender);
