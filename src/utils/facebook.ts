@@ -33,7 +33,7 @@ const persistent_menu = [
       {
         title: '👫 Tìm ngẫu nhiên',
         type: 'postback',
-        payload: lang.KEYWORD_GENDER  + lang.KEYWORD_GENDER_BOTH
+        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH
       },
       {
         title: '👱 Tìm bạn nam',
@@ -96,7 +96,7 @@ const quick_buttons_genders: Array<SendQuickReply> = [
   {
     content_type: 'text',
     title: '👫 Tìm ngẫu nhiên',
-    payload: lang.KEYWORD_GENDER  + lang.KEYWORD_GENDER_BOTH
+    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH
   },
   {
     content_type: 'text',
