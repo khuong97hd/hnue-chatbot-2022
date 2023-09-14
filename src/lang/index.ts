@@ -17,6 +17,13 @@ export default {
             '- timnu: Tìm nữ chat cùng\n' +
             '- timnam: Tìm nam chat cùng',
 
+  DONATE_TXT: '[BOT] Donate cho bot tại:\n' +
+  '👉 Ngân hàng : Vietcombank\n' +
+  '👉 STK : khuongtem\n' +
+  '👉 Tên : Dương Văn Khương\n' +
+  '👉 Nội dung : Donate hnuechatbot\n' +
+  '🥰 Xin cảm ơn tình cảm của tất cả các bạn 🥰',
+
   START_OKAY: '[BOT] OK! Chúng mình sẽ thông báo khi tìm được.',
   START_WARN_GENDER: '[BOT] Lưu ý: Bạn không chọn giới tính. Có thể bạn sẽ phải đợi lâu hơn.',
   START_ERR_ALREADY: '[BOT] Bạn không thể batdau khi chưa ketthuc...',
@@ -47,6 +54,7 @@ export default {
   KEYWORD_GENDER_FEMALE: 'nu',
   KEYWORD_GENDER_BOTH: 'namnu',
   KEYWORD_HELP: 'trogiup',
+  KEYWORD_DONATE: 'ungho',
   KEYWORD_CAT: 'meow',
   KEYWORD_DOG: 'gauw',
 

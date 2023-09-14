@@ -31,6 +31,11 @@ const persistent_menu = [
     composer_input_disabled: false,
     call_to_actions: [
       {
+        title: '💝 Donate Chatbot',
+        type: 'postback',
+        payload: lang.KEYWORD_DONATE
+      },
+      {
         title: '👫 Tìm ngẫu nhiên',
         type: 'postback',
         payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH
@@ -77,22 +82,9 @@ const persistent_menu = [
 const quick_buttons_generic: Array<SendQuickReply> = [
   {
     content_type: 'text',
-    title: '🐱 meow - Xem ảnh mèo',
-    payload: lang.KEYWORD_CAT
+    title: '💝 Donate Chatbot',
+    payload: lang.KEYWORD_DONATE
   },
-  {
-    content_type: 'text',
-    title: '🐕 gauw - Xem ảnh cún',
-    payload: lang.KEYWORD_DOG
-  },
-  {
-    content_type: 'text',
-    title: '👉 Trợ giúp',
-    payload: lang.KEYWORD_HELP
-  }
-];
-
-const quick_buttons_genders: Array<SendQuickReply> = [
   {
     content_type: 'text',
     title: '👫 Tìm ngẫu nhiên',
@@ -107,6 +99,25 @@ const quick_buttons_genders: Array<SendQuickReply> = [
     content_type: 'text',
     title: '🙆 Tìm bạn nữ',
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE
+  }
+  
+];
+
+const quick_buttons_genders: Array<SendQuickReply> = [
+  {
+    content_type: 'text',
+    title: '🐱 meow - Xem ảnh mèo',
+    payload: lang.KEYWORD_CAT
+  },
+  {
+    content_type: 'text',
+    title: '🐕 gauw - Xem ảnh cún',
+    payload: lang.KEYWORD_DOG
+  },
+  {
+    content_type: 'text',
+    title: '👉 Trợ giúp',
+    payload: lang.KEYWORD_HELP
   }
 ];
 

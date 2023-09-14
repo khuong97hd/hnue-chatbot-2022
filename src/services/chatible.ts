@@ -249,6 +249,8 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       }
     } else if (command === lang.KEYWORD_HELP) {
       await fb.sendTextButtons(sender, lang.HELP_TXT, true, false, true, true, false);
+    } else if (command === lang.KEYWORD_DONATE) {
+      await fb.sendTextButtons(sender, lang.DONATE_TXT, true, false, true, true, false);
     } else if (command === lang.KEYWORD_CAT) {
       await gifts.sendCatPic(sender, null);
     } else if (command === lang.KEYWORD_DOG) {
@@ -263,6 +265,8 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await fb.sendTextButtons(sender, lang.END_CHAT, true, false, true, true, false);
     } else if (command === lang.KEYWORD_HELP) {
       await fb.sendTextButtons(sender, lang.HELP_TXT, false, false, true, false, false);
+    } else if (command === lang.KEYWORD_DONATE) {
+      await fb.sendTextButtons(sender, lang.DONATE_TXT, true, false, true, true, false);
     } else if (command === lang.KEYWORD_CAT) {
       await gifts.sendCatPic(sender, null);
     } else if (command === lang.KEYWORD_DOG) {
@@ -282,6 +286,8 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await fb.sendTextMessage('', sender, lang.START_ERR_ALREADY, false);
     } else if (command === lang.KEYWORD_HELP) {
       await fb.sendTextButtons(sender, lang.HELP_TXT, false, true, true, false, false);
+    } else if (command === lang.KEYWORD_DONATE) {
+      await fb.sendTextButtons(sender, lang.DONATE_TXT, true, false, true, true, false);
     } else if (command === lang.KEYWORD_CAT) {
       await forwardMessage(sender, sender2, event.message);
       await gifts.sendCatPic(sender, sender2);
