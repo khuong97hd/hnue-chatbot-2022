@@ -7,7 +7,7 @@ import fb from './facebook';
 
 const MAX_CAT_IMG = 10229;
 const MAX_DOG_IMG = 5250;
-const MAX_HOTBOY_IMG = 100;
+const MAX_HOTBOY_IMG = 10;
 
 /**
  * Return random integer between `min` and `max`
@@ -51,7 +51,7 @@ const getDogData = (): string => {
  */
 const getHotBoyData = (): string => {
   const img = randomIntFromInterval(1, MAX_HOTBOY_IMG);
-  if (img <= 100) {
+  if (img <= 10) {
     return `https://khuong97hd.github.io/img/hotboy/hotboy%(${img}).jpg`;
   } else {
     return `https://khuong97hd.github.io/img/hotboy/hotboy%20(1).jpg`;
