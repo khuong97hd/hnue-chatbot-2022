@@ -7,6 +7,7 @@ import fb from './facebook';
 
 const MAX_CAT_IMG = 10229;
 const MAX_DOG_IMG = 5250;
+const MAX_HOTBOY_IMG = 100;
 
 /**
  * Return random integer between `min` and `max`
@@ -45,6 +46,19 @@ const getDogData = (): string => {
 };
 
 /**
+ * Get random picture of hot boy
+ * @returns URL to image
+ */
+const getHotBoyData = (): string => {
+  const img = randomIntFromInterval(1, MAX_HOTBOY_IMG);
+  if (img <= 100) {
+    return `https://khuong97hd.github.io/img/hotboy/hotboy%(${img}).jpg`;
+  } else {
+    return `https://khuong97hd.github.io/img/hotboy/hotboy%20(1).jpg`;
+  }
+};
+
+/**
  * Send random picture of cat
  * @param id1 - ID of first user
  * @param id2 - ID of second user
@@ -74,7 +88,23 @@ const sendDogPic = async (id1: string, id2: string | null): Promise<void> => {
   }
 };
 
+/**
+ * Send random picture of cat
+ * @param id1 - ID of first user
+ * @param id2 - ID of second user
+ */
+const sendHotBoyPic = async (id1: string, id2: string | null): Promise<void> => {
+  const url = getHotBoyData();
+  if (id2 !== null) {
+    await fb.sendAttachment('', id1, 'image', url, true, false, false);
+    await fb.sendAttachment('', id2, 'image', url, true, false, true);
+  } else {
+    await fb.sendAttachment('', id1, 'image', url, true, true, false);
+  }
+};
+
 export default {
   sendCatPic,
   sendDogPic,
+  sendHotBoyPic,
 };

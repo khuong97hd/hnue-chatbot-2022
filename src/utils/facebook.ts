@@ -51,12 +51,17 @@ const persistent_menu = [
         payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE
       },
       {
-        title: '🐱 meow - Xem ảnh mèo',
+        title: '🤵 Xem ảnh trai đẹp',
+        type: 'postback',
+        payload: lang.KEYWORD_HOTBOY
+      },
+      {
+        title: '🐱 Xem ảnh mèo',
         type: 'postback',
         payload: lang.KEYWORD_CAT
       },
       {
-        title: '🐕 gauw - Xem ảnh cún',
+        title: '🐕 Xem ảnh cún',
         type: 'postback',
         payload: lang.KEYWORD_DOG
       },
@@ -104,6 +109,11 @@ const quick_buttons_generic: Array<SendQuickReply> = [
 ];
 
 const quick_buttons_genders: Array<SendQuickReply> = [
+  {
+    content_type: 'text',
+    title: '🤵 Xem ảnh trai đẹp',
+    payload: lang.KEYWORD_HOTBOY
+  },
   {
     content_type: 'text',
     title: '🐱 meow - Xem ảnh mèo',

@@ -12,7 +12,8 @@ export default {
             '- ketthuc: Kết thúc chat\n' +
             '- trogiup: Xem trợ giúp\n' +
             '- meow: Xem ảnh mèo\n' +
-            '- gauw: Xem ảnh cún\n\n' +
+            '- gauw: Xem ảnh cún\n' +
+            '- hotboy: Xem ảnh trai đẹp\n\n' +
             'Các lệnh có thể dùng khi đang không chat:\n' +
             '- timnu: Tìm nữ chat cùng\n' +
             '- timnam: Tìm nam chat cùng',
@@ -57,6 +58,7 @@ export default {
   KEYWORD_DONATE: 'ungho',
   KEYWORD_CAT: 'meow',
   KEYWORD_DOG: 'gauw',
+  KEYWORD_HOTBOY: 'hotboy',
 
   ERR_FAKE_MSG: '[BOT] Lỗi: Bạn không được giả mạo tin nhắn của bot!',
   ERR_DATABASE: '[BOT] Lỗi: Không thể kết nối với database. Hãy báo cho admin!',

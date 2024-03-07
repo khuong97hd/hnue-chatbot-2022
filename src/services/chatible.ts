@@ -255,6 +255,8 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await gifts.sendCatPic(sender, null);
     } else if (command === lang.KEYWORD_DOG) {
       await gifts.sendDogPic(sender, null);
+    } else if (command === lang.KEYWORD_HOTBOY) {
+      await gifts.sendHotBoyPic(sender, null);
     } else if (!event.read) {
       await fb.sendTextButtons(sender, lang.INSTRUCTION, true, false, true, true, false);
     }
@@ -271,6 +273,8 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await gifts.sendCatPic(sender, null);
     } else if (command === lang.KEYWORD_DOG) {
       await gifts.sendDogPic(sender, null);
+    } else if (command === lang.KEYWORD_HOTBOY) {
+      await gifts.sendHotBoyPic(sender, null);
     } else if (!event.read) {
       await fb.sendTextButtons(sender, lang.WAITING, false, false, true, false, false);
     }
@@ -294,6 +298,9 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     } else if (command === lang.KEYWORD_DOG) {
       await forwardMessage(sender, sender2, event.message);
       await gifts.sendDogPic(sender, sender2);
+    } else if (command === lang.KEYWORD_HOTBOY) {
+      await forwardMessage(sender, sender2, event.message);
+      await gifts.sendHotBoyPic(sender, sender2);
     } else {
       // FIX-ME: Only send seen indicator for messages before watermark
       if (event.read) {
