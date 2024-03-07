@@ -51,11 +51,12 @@ const getDogData = (): string => {
  */
 const getHotBoyData = (): string => {
   const img = randomIntFromInterval(1, MAX_HOTBOY_IMG);
-  if (img <= 10) {
-    return `https://khuong97hd.github.io/img/hotboy/hotboy%(${img}).jpg`;
-  } else {
-    return `https://khuong97hd.github.io/img/hotboy/hotboy%20(1).jpg`;
-  }
+  return `https://nuimeow.github.io/dog/jpg/${img}.jpg`;
+  // if (img <= 10) {
+  //   return `https://khuong97hd.github.io/img/hotboy/hotboy%(${img}).jpg`;
+  // } else {
+  //   return `https://khuong97hd.github.io/img/hotboy/hotboy%20(1).jpg`;
+  // }
 };
 
 /**
