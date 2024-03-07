@@ -116,12 +116,12 @@ const quick_buttons_genders: Array<SendQuickReply> = [
   },
   {
     content_type: 'text',
-    title: '🐱 meow - Xem ảnh mèo',
+    title: '🐱 Xem ảnh mèo',
     payload: lang.KEYWORD_CAT
   },
   {
     content_type: 'text',
-    title: '🐕 gauw - Xem ảnh cún',
+    title: '🐕 Xem ảnh cún',
     payload: lang.KEYWORD_DOG
   },
   {
