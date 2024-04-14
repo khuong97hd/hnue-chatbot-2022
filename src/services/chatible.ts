@@ -72,8 +72,8 @@ const pairPeople = async (id1: string, id2: string, gender1: GenderEnum, gender2
   await db.writeToChatRoom(id1, id2, gender1, gender2);
   await db.updateLastPerson(id1, id2);
   await db.updateLastPerson(id2, id1);
-  await fb.sendTextMessage('', id1, lang.CONNECTED + '👉 ID của bạn : ' + id1 + '\n👉 ID của đối phương : ' + id2 , false);
-  await fb.sendTextMessage('', id2, lang.CONNECTED + '👉 ID của bạn : ' + id2 + '\n👉 ID của đối phương : ' + id1, false);
+  await fb.sendTextMessage('', id1, lang.CONNECTED + '👉 ID của bạn : ' + id1 + '\n👉 ID của đối : ' + id2 , false);
+  await fb.sendTextMessage('', id2, lang.CONNECTED + '👉 ID của bạn : ' + id2 + '\n👉 ID của đối : ' + id1, false);
   await logger.logPair(id1, id2);
 };
 
