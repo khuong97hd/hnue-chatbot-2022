@@ -30,8 +30,8 @@ export default {
   START_ERR_ALREADY: '[BOT] Bạn không thể batdau khi chưa ketthuc...',
 
   WAITING: '[BOT] Đang tìm bạn chat... Nếu bạn muốn đổi giới tính, gửi ketthuc sau đó chọn giới tính mới.',
-  CONNECTED: '[BOT] Đã kết nối! Nếu muốn kết thúc cuộc trò chuyện, hãy gửi "ketthuc" \n' + 
-  'Lưu lại thông tin ID của cả 2 người nếu bị "mất kết nối" hoặc muốn tìm lại bạn chat \n'
+  CONNECTED: '[BOT] Đã kết nối! Nếu muốn kết thúc cuộc trò chuyện, hãy gửi "ketthuc"' + 
+  '\n\nLưu lại thông tin ID của cả 2 người nếu bị "mất kết nối" hoặc muốn tìm lại bạn chat. \n\n'
   ,
 
   END_CHAT: '[BOT] End chat!\nGửi batdau hoặc bấm vào nút để tìm bạn chat.',
