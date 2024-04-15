@@ -250,6 +250,11 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     return;
   }
 
+  if (command === lang.KEYWORD_PERSONAL_INFO) {
+    const user_data: UserProfileResponse = await getPersonalInfo(sender);
+    await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + 0, true);
+  } 
+
   // fetch person state
   const waitState: boolean = await db.isInWaitRoom(sender);
   const sender2: string | null = await db.findPartnerChatRoom(sender);
