@@ -34,6 +34,15 @@ interface WaitingProps {
   time: Date;
 }
 
+interface PersonalInfoProps {
+  id: string;
+  name: string;
+  money: number;
+  time_get_money: Date;
+  time: Date;
+  gender: GenderEnum;
+}
+
 /**
  * Add user to wait room
  * @param id - ID of user
@@ -275,8 +284,15 @@ const genderRead = async (): Promise<GenderEntry[]> => {
   try {
     let key = genderCache.nextKey();
     while (key) {
-      const gender: GenderEnum = genderCache.get(key);
-      ret.push({ id: key, gender });
+      const user_personal: PersonalInfoProps = genderCache.get(key);
+      ret.push({ 
+        id: key, 
+        gender: user_personal.gender, 
+        name: user_personal.name, 
+        money : user_personal.money,
+        time_get_money: new Date(user_personal.time),
+        time: new Date(user_personal.time)
+      });
       key = chatRoomCache.nextKey(key);
     }
   } catch (err) {
@@ -287,6 +303,29 @@ const genderRead = async (): Promise<GenderEntry[]> => {
 
   return ret;
 };
+
+/**
+ * Return gender data
+ */
+// const genderRead = async (): Promise<GenderEntry[]> => {
+//   const ret: GenderEntry[] = [];
+
+//   const release = await genderCacheMutex.acquire();
+//   try {
+//     let key = genderCache.nextKey();
+//     while (key) {
+//       const gender: GenderEnum = genderCache.get(key);
+//       ret.push({ id: key, gender });
+//       key = chatRoomCache.nextKey(key);
+//     }
+//   } catch (err) {
+//     logger.logError('cache::genderRead', 'This should never happen', err, true);
+//   } finally {
+//     release();
+//   }
+
+//   return ret;
+// };
 
 /**
  * Check if `user1` has just been paired with `user2`
