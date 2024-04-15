@@ -16,6 +16,10 @@ export interface WaitRoomEntry {
 
 export interface GenderEntry {
   id: string;
+  name: string;
+  money: number;
+  time_get_money: Date;
+  time: Date;
   gender: GenderEnum;
 }
 

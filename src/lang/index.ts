@@ -62,6 +62,10 @@ export default {
   KEYWORD_DOG: 'gauw',
   KEYWORD_HOTBOY: 'hotboyw',
 
+  // thông tin cá nhân
+  KEYWORD_PERSONAL_INFO: 'personal_info',
+  KEYWORD_GET_MONEY_DAILY: 'get_money_daily',
+
   ERR_FAKE_MSG: '[BOT] Lỗi: Bạn không được giả mạo tin nhắn của bot!',
   ERR_DATABASE: '[BOT] Lỗi: Không thể kết nối với database. Hãy báo cho admin!',
   ERR_TOO_LONG: '[BOT] Lỗi: Tin nhắn quá dài (nhiều hơn 2000 ký tự). Hãy chia nhỏ tin nhắn và gửi dần.',

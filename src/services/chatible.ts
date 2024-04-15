@@ -13,6 +13,16 @@ import gifts from '../utils/gifts';
 
 import GenderEnum from '../enums/GenderEnum';
 import { WebhookMessagingEvent, WebhookMessageObject } from '../interfaces/FacebookAPI';
+import {
+  SendRequest,
+  SendMessageObject,
+  SendQuickReply,
+  SendResponse,
+  MessengerProfileResponse,
+  UserProfileResponse,
+  GetPersonasResponse,
+  PostPersonasResponse,
+} from '../interfaces/FacebookAPI';
 
 /**
  * Parse string to get gender
@@ -172,6 +182,28 @@ const forwardMessage = async (sender: string, receiver: string, data: WebhookMes
 };
 
 /**
+ * Get thông tin user data
+ * Otherwise, get it from Facebook.
+ * @param id - ID of user
+ * @returns Gender of user
+ */
+const getPersonalInfo = async (id: string): Promise<UserProfileResponse> => {
+  let gender: GenderEnum | null = await db.getGender(id);
+
+  // not found in database, fetch from facebook
+  const data = await fb.getUserData(id);
+  if (data.error || !data.gender) {
+    gender = GenderEnum.UNKNOWN;
+  } else if (data.gender === 'male') {
+    gender = GenderEnum.MALE;
+  } else if (data.gender === 'female') {
+    gender = GenderEnum.FEMALE;
+  }
+
+  return data as UserProfileResponse;
+};
+
+/**
  * Process messaging event sent by Facebook
  * @param event - Messaging event
  */
@@ -265,7 +297,12 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await gifts.sendHotBoyPic(sender, null);
     } else if (!event.read) {
       await fb.sendTextButtons(sender, lang.INSTRUCTION, true, false, true, true, false);
-    }
+    } 
+    // check thông tin cá nhân
+    else if (command === lang.KEYWORD_PERSONAL_INFO) {
+      const user_data: UserProfileResponse = await getPersonalInfo(sender);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + 0, true);
+    } 
   } else if (waitState && sender2 === null) {
     // in wait room and waiting
     if (command === lang.KEYWORD_END) {

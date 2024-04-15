@@ -36,6 +36,11 @@ const persistent_menu = [
         payload: lang.KEYWORD_DONATE
       },
       {
+        title: '📝 Thông tin cá nhân',
+        type: 'postback',
+        payload: lang.KEYWORD_PERSONAL_INFO
+      },
+      {
         title: '👫 Tìm ngẫu nhiên',
         type: 'postback',
         payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH
@@ -91,6 +96,11 @@ const quick_buttons_generic: Array<SendQuickReply> = [
     payload: lang.KEYWORD_DONATE
   },
   {
+    title: '📝 Thông tin cá nhân',
+    content_type: 'text',
+    payload: lang.KEYWORD_PERSONAL_INFO
+  },
+  {
     content_type: 'text',
     title: '👫 Tìm ngẫu nhiên',
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH
@@ -109,6 +119,11 @@ const quick_buttons_generic: Array<SendQuickReply> = [
 ];
 
 const quick_buttons_genders: Array<SendQuickReply> = [
+  {
+    title: '📝 Thông tin cá nhân',
+    content_type: 'text',
+    payload: lang.KEYWORD_PERSONAL_INFO
+  },
   {
     content_type: 'text',
     title: '🤵 Xem ảnh trai đẹp',
@@ -487,6 +502,44 @@ const getUserData = async (id: string): Promise<UserProfileResponse> => {
   }
 };
 
+// xem thông tin cá nhân
+/**
+ * Send text message with buttons
+ * @param receiver - ID of receiver
+ * @param text - Text to send
+ * @param showAcceptExitButton - Should exit button
+ */
+const sendPersonalInfoButtons = async (
+  receiver: string,
+  text: string,
+  showPersonalInfoButton: boolean,
+): Promise<void> => {
+  const buttons = [];
+
+  if (showPersonalInfoButton) {
+    buttons.push({ type: 'postback', title: 'Điểm danh nhận xu !', payload: lang.KEYWORD_GET_MONEY_DAILY });
+  }
+
+  let quick_replies: Array<SendQuickReply> = [];
+
+  const messageData: SendMessageObject = {};
+
+  if (showPersonalInfoButton) {
+    messageData.attachment = {
+      type: 'template',
+      payload: {
+        template_type: 'button',
+        text,
+        buttons,
+      },
+    };
+  } else {
+    messageData.text = text;
+  }
+
+  await sendMessage(receiver, messageData, true);
+};
+
 export default {
   setPersona,
   setMessengerProfile,
@@ -496,4 +549,5 @@ export default {
   sendAcceptExitButtons,
   sendSeenIndicator,
   getUserData,
+  sendPersonalInfoButtons,
 };
