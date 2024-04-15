@@ -192,6 +192,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     return;
   }
 
+  // ID của người gửi tới page
   const sender: string = event.sender.id;
 
   if (config.MAINTENANCE) {
@@ -199,6 +200,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     return;
   }
 
+  // Nhận lệnh từ người gửi
   let text = '';
   if (event.message.quick_reply && event.message.quick_reply.payload) {
     text = event.message.quick_reply.payload;
@@ -223,9 +225,12 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
   if (!waitState && sender2 === null) {
     // neither in chat room nor wait room
     if (command === lang.KEYWORD_START) {
+      // nếu bấm 'batdau', sẽ set giới tính theo id trong db, nếu db không có thì call api get giới tính của fb
       const gender: GenderEnum = await getGender(sender);
       await findPair(sender, gender);
-    } else if (command.startsWith(lang.KEYWORD_GENDER)) {
+    } 
+    // nếu bấm 'tìm', nếu tìm nữ -> set giới tính : nam, tìm nam -> set giới tính : nữ
+    else if (command.startsWith(lang.KEYWORD_GENDER)) {
       const gender: GenderEnum | null = parseGender(command);
       if (gender === null) {
         await fb.sendTextButtons(sender, lang.GENDER_ERR, false, false, true, true, false);
