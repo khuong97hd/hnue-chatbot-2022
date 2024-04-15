@@ -320,7 +320,11 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await gifts.sendHotBoyPic(sender, null);
     } else if (!event.read) {
       await fb.sendTextButtons(sender, lang.WAITING, false, false, true, false, false);
-    }
+    }// check thông tin cá nhân
+    else if (command === lang.KEYWORD_PERSONAL_INFO) {
+      const user_data: UserProfileResponse = await getPersonalInfo(sender);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + 0, true);
+    } 
   } else if (!waitState && sender2 !== null) {
     // in chat room
     if (command === lang.KEYWORD_END) {
@@ -344,7 +348,13 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     } else if (command === lang.KEYWORD_HOTBOY) {
       await forwardMessage(sender, sender2, event.message);
       await gifts.sendHotBoyPic(sender, sender2);
-    } else {
+    } 
+    // check thông tin cá nhân
+    else if (command === lang.KEYWORD_PERSONAL_INFO) {
+      const user_data: UserProfileResponse = await getPersonalInfo(sender);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + 0, true);
+    } 
+    else {
       // FIX-ME: Only send seen indicator for messages before watermark
       if (event.read) {
         await fb.sendSeenIndicator(sender2);

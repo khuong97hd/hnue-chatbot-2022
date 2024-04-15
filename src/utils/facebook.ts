@@ -120,11 +120,6 @@ const quick_buttons_generic: Array<SendQuickReply> = [
 
 const quick_buttons_genders: Array<SendQuickReply> = [
   {
-    title: '📝 Thông tin cá nhân',
-    content_type: 'text',
-    payload: lang.KEYWORD_PERSONAL_INFO
-  },
-  {
     content_type: 'text',
     title: '🤵 Xem ảnh trai đẹp',
     payload: lang.KEYWORD_HOTBOY
