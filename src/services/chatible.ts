@@ -433,8 +433,8 @@ function isCurrentTimeGreaterThan24Hours(inputDateString: string): boolean {
   const currentDate = new Date();
 
   // Thêm 24 giờ vào thời gian đầu vào
-  const nextDayDate = new Date(inputDate.getTime() + (24 * 3600 * 1000));
-
+  const nextDayDate = new Date(inputDate.getTime() + (0.01 * 3600 * 1000));
+  
   // So sánh thời gian hiện tại với thời gian đầu vào + 24 giờ
   return currentDate.getTime() >= nextDayDate.getTime();
 }
