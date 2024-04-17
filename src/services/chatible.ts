@@ -303,7 +303,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       else if (command === lang.KEYWORD_PERSONAL_INFO) {
       await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
     } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
-      if (isCurrentTimeGreaterThan24Hours(time_get_money_convert)) {
+      if (isCurrentTimeGreaterThan24Hours(String(user_data.time_get_money))) {
         await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
         await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
       } else {
@@ -332,7 +332,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       else if (command === lang.KEYWORD_PERSONAL_INFO) {
       await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
     } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
-      if (isCurrentTimeGreaterThan24Hours(time_get_money_convert)) {
+      if (isCurrentTimeGreaterThan24Hours(String(user_data.time_get_money))) {
         await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
         await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
       } else {
@@ -370,7 +370,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     else if (command === lang.KEYWORD_PERSONAL_INFO) {
       await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
     } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
-      if (isCurrentTimeGreaterThan24Hours(time_get_money_convert)) {
+      if (isCurrentTimeGreaterThan24Hours(String(user_data.time_get_money))) {
         await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
         await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
       } else {
@@ -434,7 +434,8 @@ function isCurrentTimeGreaterThan24Hours(inputDateString: string): boolean {
 
   // Thêm 24 giờ vào thời gian đầu vào
   const nextDayDate = new Date(inputDate.getTime() + (0.01 * 3600 * 1000));
-  
+  logger.logError('currentDate', 'currentDate',currentDate);
+  logger.logError('nextDayDate', 'nextDayDate',nextDayDate);
   // So sánh thời gian hiện tại với thời gian đầu vào + 24 giờ
   return currentDate.getTime() >= nextDayDate.getTime();
 }
