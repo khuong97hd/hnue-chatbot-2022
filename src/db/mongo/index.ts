@@ -11,6 +11,8 @@ import Gender from '../models/gender';
 import LastPerson from '../models/lastperson';
 import GenderEnum from '../../enums/GenderEnum';
 import logger from '../../utils/logger';
+import MegaHash from 'megahash';
+import { ChatRoomEntry, WaitRoomEntry, GenderEntry, LastPersonEntry,UserProfileResponseEntry } from '../../interfaces/DatabaseEntry';
 
 /**
  * `findOneAndUpdate` with `upsert` is not atomic.
@@ -32,6 +34,28 @@ const genderWrite = async (id: string, gender: GenderEnum): Promise<void> => {
   } finally {
     release();
   }
+};
+
+/**
+ * Get gender of user
+ * Return `null` if not available.
+ * @param id - ID of user
+ */
+const genderCacheMutex = new Mutex();
+const genderCache = new MegaHash();
+const findUserData = async (id: string): Promise<UserProfileResponseEntry> => {
+  let ret: UserProfileResponseEntry | null = null;
+
+  const release = await genderCacheMutex.acquire();
+  try {
+    ret = genderCache.has(id) ? genderCache.get(id) : null;
+  } catch (err) {
+    logger.logError('cache::genderFind', 'This should never happen', err, true);
+  } finally {
+    release();
+  }
+
+  return ret as UserProfileResponseEntry;
 };
 
 /**
@@ -162,4 +186,5 @@ export default {
   chatRoomRemove,
   lastPersonWrite,
   resetDatabase,
+  findUserData
 };

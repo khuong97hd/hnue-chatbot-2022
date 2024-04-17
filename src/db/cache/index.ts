@@ -290,7 +290,7 @@ const genderRead = async (): Promise<GenderEntry[]> => {
         gender: user_personal.gender, 
         name: user_personal.name, 
         money : user_personal.money,
-        time_get_money: new Date(user_personal.time),
+        time_get_money: new Date(user_personal.time_get_money),
         time: new Date(user_personal.time)
       });
       key = chatRoomCache.nextKey(key);

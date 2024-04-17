@@ -13,8 +13,8 @@ import cache from './cache';
 import mongo from './mongo';
 import logger from '../utils/logger';
 
-import { ChatRoomEntry, WaitRoomEntry, GenderEntry, LastPersonEntry } from '../interfaces/DatabaseEntry';
 import GenderEnum from '../enums/GenderEnum';
+import { ChatRoomEntry, WaitRoomEntry, GenderEntry, LastPersonEntry,UserProfileResponseEntry } from '../interfaces/DatabaseEntry';
 
 /**
  * Fetch data from database to cache
@@ -66,6 +66,15 @@ const setGender = async (id: string, gender: GenderEnum): Promise<void> => {
  */
 const getGender = async (id: string): Promise<GenderEnum | null> => {
   return await cache.genderFind(id);
+};
+
+/**
+ * Get info of user from database.
+ * Return `null` if not available.
+ * @param id - ID of user
+ */
+const getUserData = async (id: string): Promise<UserProfileResponseEntry | null> => {
+  return await mongo.findUserData(id);
 };
 
 /**
@@ -209,4 +218,6 @@ export default {
   getListLastPerson,
 
   resetDatabase,
+  // get user data
+  getUserData
 };

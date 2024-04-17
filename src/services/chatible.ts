@@ -23,6 +23,7 @@ import {
   GetPersonasResponse,
   PostPersonasResponse,
 } from '../interfaces/FacebookAPI';
+import { ChatRoomEntry, WaitRoomEntry, GenderEntry, LastPersonEntry,UserProfileResponseEntry } from '../interfaces/DatabaseEntry';
 
 /**
  * Parse string to get gender
@@ -187,20 +188,19 @@ const forwardMessage = async (sender: string, receiver: string, data: WebhookMes
  * @param id - ID of user
  * @returns Gender of user
  */
-const getPersonalInfo = async (id: string): Promise<UserProfileResponse> => {
-  let gender: GenderEnum | null = await db.getGender(id);
-
-  // not found in database, fetch from facebook
-  const data = await fb.getUserData(id);
-  if (data.error || !data.gender) {
-    gender = GenderEnum.UNKNOWN;
-  } else if (data.gender === 'male') {
-    gender = GenderEnum.MALE;
-  } else if (data.gender === 'female') {
-    gender = GenderEnum.FEMALE;
+const getPersonalInfo = async (id: string): Promise<UserProfileResponseEntry> => {
+  try {
+    let user_data: UserProfileResponseEntry | null = await db.getUserData(id);
+    return user_data as UserProfileResponseEntry;
+  } catch (err) {
+    logger.logError('facebook::getUserData', 'Failed to send request to database', err, true);
+    return {};
   }
 
-  return data as UserProfileResponse;
+  // not found in database, fetch from facebook
+  // const user_data_facebook = await fb.getUserData(id);
+
+  // return user_data as UserProfileResponseEntry;
 };
 
 /**
@@ -251,7 +251,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
   }
 
   if (command === lang.KEYWORD_PERSONAL_INFO) {
-    const user_data: UserProfileResponse = await getPersonalInfo(sender);
+    const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
     await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + 0, true);
   } 
 
@@ -305,8 +305,8 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     } 
     // check thông tin cá nhân
     else if (command === lang.KEYWORD_PERSONAL_INFO) {
-      const user_data: UserProfileResponse = await getPersonalInfo(sender);
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + 0, true);
+      const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
     } 
   } else if (waitState && sender2 === null) {
     // in wait room and waiting
@@ -327,7 +327,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await fb.sendTextButtons(sender, lang.WAITING, false, false, true, false, false);
     }// check thông tin cá nhân
     else if (command === lang.KEYWORD_PERSONAL_INFO) {
-      const user_data: UserProfileResponse = await getPersonalInfo(sender);
+      const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
       await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + 0, true);
     } 
   } else if (!waitState && sender2 !== null) {
@@ -356,7 +356,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     } 
     // check thông tin cá nhân
     else if (command === lang.KEYWORD_PERSONAL_INFO) {
-      const user_data: UserProfileResponse = await getPersonalInfo(sender);
+      const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
       await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + 0, true);
     } 
     else {

@@ -23,6 +23,15 @@ export interface GenderEntry {
   gender: GenderEnum;
 }
 
+export interface UserProfileResponseEntry {
+  id?: string;
+  name?: string;
+  money?: number;
+  time_get_money?: Date;
+  time?: Date;
+  gender?: GenderEnum;
+}
+
 export interface LastPersonEntry {
   id1: string;
   id2: string;
