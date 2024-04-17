@@ -226,6 +226,8 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
 
   // ID của người gửi tới page
   const sender: string = event.sender.id;
+  // user data
+  const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
 
   if (config.MAINTENANCE) {
     await fb.sendTextMessage('', sender, lang.MAINTENANCE, false);
@@ -249,11 +251,6 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     await fb.sendTextButtons(sender, lang.FIRST_COME, true, false, true, true, false);
     return;
   }
-
-  if (command === lang.KEYWORD_PERSONAL_INFO) {
-    const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
-    await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + user_data.money, true);
-  } 
 
   // fetch person state
   const waitState: boolean = await db.isInWaitRoom(sender);
@@ -300,14 +297,15 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await gifts.sendDogPic(sender, null);
     } else if (command === lang.KEYWORD_HOTBOY) {
       await gifts.sendHotBoyPic(sender, null);
-    } else if (!event.read) {
+    } // check thông tin cá nhân
+      else if (command === lang.KEYWORD_PERSONAL_INFO) {
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
+    } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
+    }else if (!event.read) {
       await fb.sendTextButtons(sender, lang.INSTRUCTION, true, false, true, true, false);
     } 
-    // check thông tin cá nhân
-    else if (command === lang.KEYWORD_PERSONAL_INFO) {
-      const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
-    } 
+    
   } else if (waitState && sender2 === null) {
     // in wait room and waiting
     if (command === lang.KEYWORD_END) {
@@ -323,13 +321,15 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await gifts.sendDogPic(sender, null);
     } else if (command === lang.KEYWORD_HOTBOY) {
       await gifts.sendHotBoyPic(sender, null);
-    } else if (!event.read) {
+    } // check thông tin cá nhân
+      else if (command === lang.KEYWORD_PERSONAL_INFO) {
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
+    } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
+    }
+    else if (!event.read) {
       await fb.sendTextButtons(sender, lang.WAITING, false, false, true, false, false);
-    }// check thông tin cá nhân
-    else if (command === lang.KEYWORD_PERSONAL_INFO) {
-      const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + user_data.money, true);
-    } 
+    }
   } else if (!waitState && sender2 !== null) {
     // in chat room
     if (command === lang.KEYWORD_END) {
@@ -356,9 +356,10 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     } 
     // check thông tin cá nhân
     else if (command === lang.KEYWORD_PERSONAL_INFO) {
-      const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + user_data.money, true);
-    } 
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
+    } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
+    }
     else {
       // FIX-ME: Only send seen indicator for messages before watermark
       if (event.read) {

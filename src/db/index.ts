@@ -78,6 +78,15 @@ const getUserData = async (id: string): Promise<UserProfileResponseEntry | null>
 };
 
 /**
+ * Get money daily
+ * @param id - ID of user
+ * @param gender - Gender of user
+ */
+const getMoneyDaily = async (id: string, money: number, time_get_money = new Date()): Promise<void> => {
+  await mongo.getMoneyDaily(id, money, time_get_money);
+};
+
+/**
  * Return gender data
  */
 const getListGender = async (): Promise<GenderEntry[]> => {

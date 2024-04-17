@@ -37,7 +37,7 @@ const genderWrite = async (id: string, gender: GenderEnum): Promise<void> => {
 };
 
 /**
- * Get gender of user
+ * Thông tin of user
  * Return `null` if not available.
  * @param id - ID of user
  */
@@ -57,6 +57,27 @@ const findUserData = async (id: string): Promise<UserProfileResponseEntry> => {
   }
 
   return ret as UserProfileResponseEntry;
+};
+
+/**
+ * Add paired users to chat room
+ * @param id - ID of first user
+ * @param money - ID of second user
+ * @param time_get_money - Gender of first user
+ */
+const getMoneyDaily = async (
+  id: string,
+  money: number,
+  time_get_money: Date,
+): Promise<void> => {
+  const release = await mongoMutex.acquire();
+  try {
+    await Gender.findOneAndUpdate({ id }, { $set: { "money": money + 1, "time_get_money" : time_get_money } }, { upsert: true });
+  } catch (err) {
+    logger.logError('mongo::getMoneyDaily', 'Failed to save data to MongoDB', err, true);
+  } finally {
+    release();
+  }
 };
 
 /**
@@ -187,5 +208,6 @@ export default {
   chatRoomRemove,
   lastPersonWrite,
   resetDatabase,
-  findUserData
+  findUserData,
+  getMoneyDaily
 };
