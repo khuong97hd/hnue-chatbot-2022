@@ -512,7 +512,7 @@ const sendPersonalInfoButtons = async (
   const buttons = [];
 
   if (showPersonalInfoButton) {
-    buttons.push({ type: 'postback', title: 'Điểm danh nhận xu !', payload: lang.KEYWORD_GET_MONEY_DAILY });
+    buttons.push({ type: 'postback', title: '✅ Điểm danh nhận xu !', payload: lang.KEYWORD_GET_MONEY_DAILY });
   }
 
   let quick_replies: Array<SendQuickReply> = [];

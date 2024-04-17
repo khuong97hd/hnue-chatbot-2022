@@ -228,7 +228,8 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
   const sender: string = event.sender.id;
   // user data
   const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
-  let time_get_money_convert = formatDate(String(user_data.time_get_money)) ;
+  let time_get_money_convert = formatDate(String(user_data.time_get_money), 0) ;
+  let time_get_money_convert_next = formatDate(String(user_data.time_get_money), 24) ;
 
   if (config.MAINTENANCE) {
     await fb.sendTextMessage('', sender, lang.MAINTENANCE, false);
@@ -300,10 +301,14 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await gifts.sendHotBoyPic(sender, null);
     } // check thông tin cá nhân
       else if (command === lang.KEYWORD_PERSONAL_INFO) {
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n ⏰ Thời gian: ' + time_get_money_convert, true);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
     } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
-      await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n ⏰ Thời gian: ' + time_get_money_convert, true);
+      if (isCurrentTimeGreaterThan24Hours(time_get_money_convert)) {
+        await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
+        await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
+      } else {
+        await fb.sendTextMessage('', sender, 'Bạn đã điểm danh ngày hôm nay, hãy quay lại vào ngày mai !' + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, false);
+      }
     }else if (!event.read) {
       await fb.sendTextButtons(sender, lang.INSTRUCTION, true, false, true, true, false);
     } 
@@ -325,10 +330,14 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await gifts.sendHotBoyPic(sender, null);
     } // check thông tin cá nhân
       else if (command === lang.KEYWORD_PERSONAL_INFO) {
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n ⏰ Thời gian: ' + time_get_money_convert, true);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
     } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
-      await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n ⏰ Thời gian: ' + time_get_money_convert, true);
+      if (isCurrentTimeGreaterThan24Hours(time_get_money_convert)) {
+        await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
+        await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
+      } else {
+        await fb.sendTextMessage('', sender, 'Bạn đã điểm danh ngày hôm nay, hãy quay lại vào ngày mai !' + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, false);
+      }
     }
     else if (!event.read) {
       await fb.sendTextButtons(sender, lang.WAITING, false, false, true, false, false);
@@ -359,10 +368,14 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     } 
     // check thông tin cá nhân
     else if (command === lang.KEYWORD_PERSONAL_INFO) {
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n ⏰ Thời gian: ' + time_get_money_convert, true);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
     } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
-      await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n ⏰ Thời gian: ' + time_get_money_convert, true);
+      if (isCurrentTimeGreaterThan24Hours(time_get_money_convert)) {
+        await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
+        await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
+      } else {
+        await fb.sendTextMessage('', sender, 'Bạn đã điểm danh ngày hôm nay, hãy quay lại vào ngày mai !' + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, false);
+      }
     }
     else {
       // FIX-ME: Only send seen indicator for messages before watermark
@@ -398,9 +411,9 @@ const removeTimeoutUser = async (): Promise<void> => {
 };
 
 // hàm chuyển đổi giờ sang dd/mm/yyyy hh:mm:ss
-function formatDate(input: string): string {
+function formatDate(input: string, addHours: number): string {
   const date = new Date(input);
-  const adjustedDate = new Date(date.getTime() + (7 * 3600000)); // 7 giờ = 7 * 3600 * 1000 milliseconds
+  const adjustedDate = new Date(date.getTime() + ((7+addHours)  * 3600000)); // 7 giờ = 7 * 3600 * 1000 milliseconds
 
   const day = String(adjustedDate.getDate()).padStart(2, '0');
   const month = String(adjustedDate.getMonth() + 1).padStart(2, '0');
@@ -410,6 +423,20 @@ function formatDate(input: string): string {
   const seconds = String(adjustedDate.getSeconds()).padStart(2, '0');
 
   return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+}
+
+// hàm tính toán chênh lệnh 2 ngày với nhau
+function isCurrentTimeGreaterThan24Hours(inputDateString: string): boolean {
+  // Chuyển đổi chuỗi đầu vào thành đối tượng Date
+  const inputDate = new Date(inputDateString);
+  // Lấy thời gian hiện tại
+  const currentDate = new Date();
+
+  // Thêm 24 giờ vào thời gian đầu vào
+  const nextDayDate = new Date(inputDate.getTime() + (24 * 3600 * 1000));
+
+  // So sánh thời gian hiện tại với thời gian đầu vào + 24 giờ
+  return currentDate.getTime() >= nextDayDate.getTime();
 }
 
 export default {
