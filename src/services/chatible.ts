@@ -252,7 +252,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
 
   if (command === lang.KEYWORD_PERSONAL_INFO) {
     const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
-    await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + 0, true);
+    await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + user_data.money, true);
   } 
 
   // fetch person state
@@ -328,7 +328,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     }// check thông tin cá nhân
     else if (command === lang.KEYWORD_PERSONAL_INFO) {
       const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + 0, true);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + user_data.money, true);
     } 
   } else if (!waitState && sender2 !== null) {
     // in chat room
@@ -357,7 +357,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     // check thông tin cá nhân
     else if (command === lang.KEYWORD_PERSONAL_INFO) {
       const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + 0, true);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu:' + user_data.money, true);
     } 
     else {
       // FIX-ME: Only send seen indicator for messages before watermark

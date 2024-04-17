@@ -48,7 +48,8 @@ const findUserData = async (id: string): Promise<UserProfileResponseEntry> => {
 
   const release = await genderCacheMutex.acquire();
   try {
-    ret = genderCache.has(id) ? genderCache.get(id) : null;
+    ret = await Gender.findOne({ id });
+    // ret = genderCache.has(id) ? genderCache.get(id) : null;
   } catch (err) {
     logger.logError('cache::genderFind', 'This should never happen', err, true);
   } finally {
