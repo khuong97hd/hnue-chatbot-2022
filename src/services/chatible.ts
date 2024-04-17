@@ -228,6 +228,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
   const sender: string = event.sender.id;
   // user data
   const user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
+  let time_get_money_convert = formatDate(String(user_data.time_get_money)) ;
 
   if (config.MAINTENANCE) {
     await fb.sendTextMessage('', sender, lang.MAINTENANCE, false);
@@ -299,10 +300,10 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await gifts.sendHotBoyPic(sender, null);
     } // check thông tin cá nhân
       else if (command === lang.KEYWORD_PERSONAL_INFO) {
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n ⏰ Thời gian: ' + time_get_money_convert, true);
     } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
       await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n ⏰ Thời gian: ' + time_get_money_convert, true);
     }else if (!event.read) {
       await fb.sendTextButtons(sender, lang.INSTRUCTION, true, false, true, true, false);
     } 
@@ -324,10 +325,10 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       await gifts.sendHotBoyPic(sender, null);
     } // check thông tin cá nhân
       else if (command === lang.KEYWORD_PERSONAL_INFO) {
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n ⏰ Thời gian: ' + time_get_money_convert, true);
     } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
       await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n ⏰ Thời gian: ' + time_get_money_convert, true);
     }
     else if (!event.read) {
       await fb.sendTextButtons(sender, lang.WAITING, false, false, true, false, false);
@@ -358,10 +359,10 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     } 
     // check thông tin cá nhân
     else if (command === lang.KEYWORD_PERSONAL_INFO) {
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n ⏰ Thời gian: ' + time_get_money_convert, true);
     } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
       await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
-      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
+      await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n ⏰ Thời gian: ' + time_get_money_convert, true);
     }
     else {
       // FIX-ME: Only send seen indicator for messages before watermark
@@ -395,6 +396,21 @@ const removeTimeoutUser = async (): Promise<void> => {
     }
   });
 };
+
+// hàm chuyển đổi giờ sang dd/mm/yyyy hh:mm:ss
+function formatDate(input: string): string {
+  const date = new Date(input);
+  const adjustedDate = new Date(date.getTime() + (7 * 3600000)); // 7 giờ = 7 * 3600 * 1000 milliseconds
+
+  const day = String(adjustedDate.getDate()).padStart(2, '0');
+  const month = String(adjustedDate.getMonth() + 1).padStart(2, '0');
+  const year = adjustedDate.getFullYear();
+  const hours = String(adjustedDate.getHours()).padStart(2, '0');
+  const minutes = String(adjustedDate.getMinutes()).padStart(2, '0');
+  const seconds = String(adjustedDate.getSeconds()).padStart(2, '0');
+
+  return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+}
 
 export default {
   processEvent,
