@@ -301,6 +301,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       else if (command === lang.KEYWORD_PERSONAL_INFO) {
       await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
     } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
+      await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
       await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
     }else if (!event.read) {
       await fb.sendTextButtons(sender, lang.INSTRUCTION, true, false, true, true, false);
@@ -325,6 +326,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       else if (command === lang.KEYWORD_PERSONAL_INFO) {
       await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
     } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
+      await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
       await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
     }
     else if (!event.read) {
@@ -358,6 +360,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     else if (command === lang.KEYWORD_PERSONAL_INFO) {
       await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
     } else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
+      await db.getMoneyDaily(sender,user_data.money ? user_data.money : 0);
       await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money, true);
     }
     else {

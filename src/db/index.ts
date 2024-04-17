@@ -228,5 +228,6 @@ export default {
 
   resetDatabase,
   // get user data
-  getUserData
+  getUserData,
+  getMoneyDaily
 };
