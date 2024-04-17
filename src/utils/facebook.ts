@@ -431,7 +431,7 @@ const sendTextButtons = async (
   const buttons = [];
 
   if (showAcceptExitButton) {
-    buttons.push({ type: 'postback', title: 'Kết thúc cuộc tình !', payload: lang.KEYWORD_ACCEPT_END });
+    buttons.push({ type: 'postback', title: 'Kết thúc!', payload: lang.KEYWORD_ACCEPT_END });
   }
 
   let quick_replies: Array<SendQuickReply> = [];
@@ -451,7 +451,7 @@ const sendTextButtons = async (
     messageData.text = text;
   }
 
-  await sendMessage(receiver, messageData, true);
+  await sendMessage(receiver, messageData, false);
 };
 
 /**
@@ -532,7 +532,7 @@ const sendPersonalInfoButtons = async (
     messageData.text = text;
   }
 
-  await sendMessage(receiver, messageData, true);
+  await sendMessage(receiver, messageData, false);
 };
 
 export default {
