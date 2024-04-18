@@ -305,8 +305,8 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
             let user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
             let time_get_money_convert = formatDate(String(user_data.time_get_money), 0);
             let time_get_money_convert_next = formatDate(String(user_data.time_get_money), 24);
-            // await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
-            await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + user_data.time_get_money + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
+            await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
+            // await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + user_data.time_get_money + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
         }
         // Get money daily
         else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
@@ -352,8 +352,8 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
             let user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
             let time_get_money_convert = formatDate(String(user_data.time_get_money), 0);
             let time_get_money_convert_next = formatDate(String(user_data.time_get_money), 24);
-            // await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
-            await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + user_data.time_get_money + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
+            await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
+            // await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + user_data.time_get_money + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
         }
         // Get money daily
         else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
@@ -407,8 +407,8 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
             let user_data: UserProfileResponseEntry = await getPersonalInfo(sender);
             let time_get_money_convert = formatDate(String(user_data.time_get_money), 0);
             let time_get_money_convert_next = formatDate(String(user_data.time_get_money), 24);
-            // await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
-            await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + user_data.time_get_money + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
+            await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + time_get_money_convert + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
+            // await fb.sendPersonalInfoButtons(sender, '👉 ID: ' + user_data.id + '\n💸 Xu: ' + user_data.money + '\n⏰ Đã nhận lúc: ' + user_data.time_get_money + '\n⏳ Lượt tiếp theo: ' + time_get_money_convert_next, true);
         }
         // Get money daily
         else if (command === lang.KEYWORD_GET_MONEY_DAILY) {
