@@ -25,12 +25,10 @@ const GenderSchema: Schema = new Schema({
   time_get_money: {
     type: Date,
     required: false,
-    default: Date.now,
   },
   time: {
     type: Date,
     required: false,
-    default: Date.now,
   },
 });
 
