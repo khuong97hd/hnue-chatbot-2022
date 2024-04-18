@@ -27,7 +27,7 @@ export interface UserProfileResponseEntry {
   id?: string;
   name?: string;
   money?: number;
-  time_get_money?: Date;
+  time_get_money?: Date | undefined;
   time?: Date;
   gender?: GenderEnum;
 }
