@@ -13,6 +13,8 @@ router.post('/edit/chatroom', auth, async (req, res) => {
   const data = req.body;
   let ret: AdminReplyProps = { success: false, error: true };
   if (data.type === 'match') {
+    ret = await Admin.softRemove(data.id1);
+    ret = await Admin.softRemove(data.id2);
     ret = await Admin.forceMatch(data.id1, data.id2, data.gender1, data.gender2);
   } else if (data.type === 'remove') {
     ret = await Admin.forceRemove(data.id);

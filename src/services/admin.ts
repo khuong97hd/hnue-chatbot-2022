@@ -159,6 +159,18 @@ const forceRemove = async (id: string): Promise<AdminReplyProps> => {
   return { success: true, error: false };
 };
 
+/**
+ * Remove user from wait room and chat room.
+ * If that user is connected with another one, remove that one too.
+ * @param id - ID of user
+ */
+const softRemove = async (id: string): Promise<AdminReplyProps> => {
+  await db.removeFromChatRoom(id);
+  await db.removeFromWaitRoom(id);
+
+  return { success: true, error: false };
+};
+
 const getUserData = async (id: string): Promise<AdminReplyProps> => {
   const ret = await fb.getUserData(id);
   if (ret.error) {
@@ -184,6 +196,7 @@ export default {
   readStats,
   forceMatch,
   forceRemove,
+  softRemove,
   getUserData,
   resetDatabase,
 };
