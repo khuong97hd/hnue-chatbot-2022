@@ -25,7 +25,7 @@ const GenderSchema: Schema = new Schema({
   time_get_money: {
     type: Date,
     required: false,
-    default: Date.now,
+    default: new Date('2024-04-17'),
   },
   time: {
     type: Date,
